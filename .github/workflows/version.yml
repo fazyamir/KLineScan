@@ -1,0 +1,57 @@
+name: version
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      part:
+        description: Version part to bump
+        type: choice
+        options: [patch, minor, major]
+        default: patch
+
+permissions:
+  contents: write
+
+concurrency:
+  group: version-bump
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Detect an existing version commit
+        id: guard
+        shell: bash
+        run: |
+          if git log -1 --pretty=%s | grep -q '^chore: bump version to '; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Bump patch version and tag
+        if: github.event_name == 'workflow_dispatch' || steps.guard.outputs.skip != 'true'
+        shell: bash
+        env:
+          PART: ${{ github.event.inputs.part || 'patch' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python tools/bump_version.py --part "$PART"
+          VERSION="$(cat version.txt)"
+          git add klinescan/__version__.py version.txt
+          git commit -m "chore: bump version to ${VERSION}"
+          git tag "v${VERSION}"
+          git push origin main
+          git push origin "v${VERSION}"

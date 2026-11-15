@@ -36,6 +36,8 @@ are not vehicle captures.
   tests.
 - Prefer clear names and small functions. Add a test for every bug fix.
 - Do not add comments that restate the code.
+- Do not edit `klinescan/__version__.py` or `version.txt`; the version workflow
+  bumps them on `main`.
 
 ## License
 

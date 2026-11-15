@@ -199,6 +199,14 @@ The app then asks to restart. To turn the startup check off, use
 in `~/.klinescan/config.json`. **Help → Check for Updates...** triggers a manual
 check at any time.
 
+## Versioning
+
+`klinescan/__version__.py` and `version.txt` are updated automatically. Every
+push to `main` bumps the patch version, commits the change as
+`chore: bump version to X.Y.Z`, and pushes a matching `vX.Y.Z` tag. The same
+workflow can be run manually from the Actions tab to bump a minor or major
+version. Do not edit the version files by hand in a pull request.
+
 ## Testing
 
 ```bash
