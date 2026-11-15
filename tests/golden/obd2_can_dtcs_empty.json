@@ -1,0 +1,31 @@
+{
+  "id": "obd2_can_dtcs_empty",
+  "description": "CAN OBD-II stored, pending and permanent DTC reads with zero counts.",
+  "provenance": "Synthetic conformance fixture derived from J1979 Mode 03/07/0A response framing. Not a vehicle capture.",
+  "protocol": "obd2",
+  "target": {
+    "name": "CAN OBD-II",
+    "protocol": "CAN_OBD",
+    "baudrate": 500000,
+    "can_tx_id": "0x7DF",
+    "can_rx_id": "0x7E8"
+  },
+  "exchanges": [
+    {
+      "tx": "01 03 00 00 00 00 00 00",
+      "rx": ["02 43 00 00 00 00 00 00"]
+    },
+    {
+      "tx": "01 07 00 00 00 00 00 00",
+      "rx": ["02 47 00 00 00 00 00 00"]
+    },
+    {
+      "tx": "01 0A 00 00 00 00 00 00",
+      "rx": ["02 4A 00 00 00 00 00 00"]
+    }
+  ],
+  "operation": {
+    "name": "read_dtcs",
+    "expect": []
+  }
+}

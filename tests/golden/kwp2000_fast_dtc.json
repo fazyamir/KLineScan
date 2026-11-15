@@ -1,0 +1,22 @@
+{
+  "id": "kwp2000_fast_dtc",
+  "description": "KWP2000 ReadDTCByStatus returns one stored P0115.",
+  "provenance": "Synthetic conformance fixture derived from the KWP2000 DTC record layout. Not a vehicle capture.",
+  "protocol": "kwp2000",
+  "target": {
+    "name": "KWP2000 ECU",
+    "protocol": "KWP2000_FAST",
+    "baudrate": 10400,
+    "ecu_addr": "0x11",
+    "tester_addr": "0xF1"
+  },
+  "exchanges": [
+    {
+      "tx": "84 11 F1 18 00 FF 00 9D",
+      "rx": ["85 F1 11 58 01 01 15 20 16"]
+    }
+  ],
+  "operation": {
+    "name": "read_dtcs"
+  }
+}

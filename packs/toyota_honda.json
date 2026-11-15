@@ -1,0 +1,90 @@
+{
+  "pack_id": "toyota_honda",
+  "name": "Toyota & Honda Diagnostic Pack",
+  "version": "1.1",
+  "region": "Japan / North America / Europe",
+  "vehicles": [
+    {
+      "label": "Toyota Yaris / Vitz 1SZ-FE (ISO 9141-2)",
+      "make": "Toyota",
+      "model": "Yaris / Echo / Vitz",
+      "year": "1999-2005",
+      "system_type": "ISO 9141-2 CARB",
+      "targets": [
+        {
+          "name": "Engine ECU (0xF0)",
+          "protocol": "ISO 9141-2 (5-Baud Slow Init)",
+          "baudrate": 10400,
+          "slow_init_addr": 51,
+          "tester_addr": 240,
+          "ecu_addr": 16,
+          "use_obd_header": true,
+          "pin": 7,
+          "actuators": [
+            {
+              "id": "vvt_ocv",
+              "name": "VVT Oil Control Valve (OCV) Test",
+              "description": "Duty cycles VVT oil control valve to advance camshaft.",
+              "payload_start": "300601",
+              "payload_stop": "300600",
+              "duration_seconds": 4,
+              "warning": "Engine will hesitate or change pitch. Run with engine warm at idle."
+            }
+          ],
+          "special_functions": [
+            {
+              "id": "idle_learn",
+              "name": "Idle Air Control Valve (IACV) Memory Clear",
+              "description": "Resets learned idle speed parameters back to factory base map.",
+              "steps": [
+                "Warm engine to normal operating temperature",
+                "Turn off all loads (A/C, headlights, rear defogger)",
+                "Click Execute and allow engine to idle undisturbed for 10 minutes"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ABS / Traction Control (Pin 8 / Pin 13)",
+          "protocol": "ISO 9141-2 (5-Baud Slow Init)",
+          "baudrate": 10400,
+          "slow_init_addr": 40,
+          "tester_addr": 240,
+          "ecu_addr": 40,
+          "use_obd_header": true,
+          "pin": 8
+        }
+      ]
+    },
+    {
+      "label": "Honda Civic / Accord / CR-V (1998-2006)",
+      "make": "Honda",
+      "model": "Civic / Accord",
+      "year": "1998-2006",
+      "system_type": "ISO 9141 / K-Line",
+      "targets": [
+        {
+          "name": "Engine / PGM-FI (0x33 Slow Init)",
+          "protocol": "ISO 9141-2 (5-Baud Slow Init)",
+          "baudrate": 10400,
+          "slow_init_addr": 51,
+          "tester_addr": 241,
+          "ecu_addr": 18,
+          "use_obd_header": true,
+          "pin": 7
+        },
+        {
+          "name": "SRS Airbag (Pin 14)",
+          "protocol": "ISO 9141-2 (5-Baud Slow Init)",
+          "baudrate": 9600,
+          "slow_init_addr": 88,
+          "tester_addr": 241,
+          "ecu_addr": 88,
+          "use_obd_header": false,
+          "pin": 14
+        }
+      ]
+    }
+  ],
+  "provenance": "Community-defined from public OBD-II and ISO 9141-2 documentation."
+}

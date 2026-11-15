@@ -1,0 +1,44 @@
+{
+  "id": "kwp1281_live",
+  "description": "KWP1281 group reads decode measurement formulas 0x01-0x03 (MW*NW scaling).",
+  "provenance": "Synthetic conformance fixture derived from the confirmed KWP1281 measurement types 0x01 and 0x02. Not a vehicle capture.",
+  "protocol": "kwp1281",
+  "target": {
+    "name": "VAG KWP1281 ECU",
+    "protocol": "KWP1281",
+    "baudrate": 10400,
+    "slow_init_addr": "0x01"
+  },
+  "simulator": {
+    "slow_init": "55 01 8A",
+    "initial_blocks": [
+      {
+        "title": "F6",
+        "data_ascii": "1J0035180B"
+      }
+    ],
+    "responses": {
+      "29:01": [
+        {
+          "title": "E7",
+          "data_hex": "01 0D AC 02 10 20"
+        }
+      ],
+      "29:02": [
+        {
+          "title": "E7",
+          "data_hex": "01 0A F0 02 80 FF"
+        }
+      ],
+      "29:03": [
+        {
+          "title": "E7",
+          "data_hex": "01 0F A0 03 55 AA"
+        }
+      ]
+    }
+  },
+  "operation": {
+    "name": "read_live_pids"
+  }
+}

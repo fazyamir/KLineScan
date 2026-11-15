@@ -1,0 +1,137 @@
+{
+  "pack_id": "hyundai_kia",
+  "name": "Hyundai & Kia Diagnostic Pack",
+  "version": "1.2",
+  "region": "Asia / Domestic / Export",
+  "vehicles": [
+    {
+      "label": "Hyundai Accent / Elantra / Sonata (2000-2006)",
+      "make": "Hyundai",
+      "model": "Elantra / Accent / Matrix",
+      "year": "2000-2006",
+      "system_type": "K-Line ISO 14230",
+      "targets": [
+        {
+          "name": "Engine (KWP2000 Fast Init)",
+          "protocol": "ISO 14230 (KWP2000 Fast Init)",
+          "baudrate": 10400,
+          "ecu_addr": 17,
+          "tester_addr": 241,
+          "explicit_length": false,
+          "pin": 7,
+          "actuators": [
+            {
+              "id": "fuel_pump",
+              "name": "Fuel Pump Relay Activation",
+              "description": "Primes fuel pump circuit for 5 seconds.",
+              "payload_start": "300201",
+              "payload_stop": "300200",
+              "duration_seconds": 5,
+              "warning": "Ensure engine is OFF before priming."
+            },
+            {
+              "id": "inj_kill_1",
+              "name": "Cylinder 1 Injector Cutout",
+              "description": "Temporarily disables cylinder 1 injector to test cylinder balance.",
+              "payload_start": "300401",
+              "payload_stop": "300400",
+              "duration_seconds": 6,
+              "warning": "Engine will stumble during test. Run at idle only."
+            }
+          ],
+          "special_functions": [
+            {
+              "id": "throttle_learn",
+              "name": "Electronic Throttle Body Adaptation",
+              "description": "Performs throttle stop learn calibration.",
+              "steps": [
+                "Key ON, Engine OFF",
+                "Coolant temperature must be above 60°C",
+                "Do NOT press gas pedal during adaptation",
+                "Click Execute and wait 15 seconds"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Automatic Transmission (AT)",
+          "protocol": "ISO 14230 (KWP2000 Fast Init)",
+          "baudrate": 10400,
+          "ecu_addr": 24,
+          "tester_addr": 241,
+          "explicit_length": false,
+          "pin": 7
+        },
+        {
+          "name": "ABS / ESP Control (Pin 8)",
+          "protocol": "ISO 14230 (KWP2000 Fast Init)",
+          "baudrate": 10400,
+          "ecu_addr": 40,
+          "tester_addr": 241,
+          "explicit_length": true,
+          "pin": 8,
+          "actuators": [
+            {
+              "id": "abs_motor",
+              "name": "ABS Hydraulic Pump Motor Test",
+              "description": "Activates ABS return pump motor for 3 seconds.",
+              "payload_start": "300801",
+              "payload_stop": "300800",
+              "duration_seconds": 3,
+              "warning": "Vehicle must be stationary on level ground with parking brake applied."
+            }
+          ],
+          "special_functions": [
+            {
+              "id": "sas_zero",
+              "name": "Steering Angle Sensor Zero Point Calibration",
+              "description": "Calibrates steering wheel straight-ahead zero position.",
+              "steps": [
+                "Center steering wheel precisely",
+                "Vehicle must be on level ground",
+                "Click Execute and do not turn steering wheel"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SRS Airbag (Pin 12)",
+          "protocol": "ISO 14230 (KWP2000 Fast Init)",
+          "baudrate": 10400,
+          "ecu_addr": 88,
+          "tester_addr": 241,
+          "explicit_length": true,
+          "pin": 12
+        }
+      ]
+    },
+    {
+      "label": "Kia Rio / Cerato / Sportage (2004-2010)",
+      "make": "Kia",
+      "model": "Rio / Cerato",
+      "year": "2004-2010",
+      "system_type": "K-Line / CAN",
+      "targets": [
+        {
+          "name": "Engine (KWP2000 10400)",
+          "protocol": "ISO 14230 (KWP2000 Fast Init)",
+          "baudrate": 10400,
+          "ecu_addr": 17,
+          "tester_addr": 241,
+          "explicit_length": false,
+          "pin": 7
+        },
+        {
+          "name": "ABS / ESC (Pin 8)",
+          "protocol": "ISO 14230 (KWP2000 Fast Init)",
+          "baudrate": 10400,
+          "ecu_addr": 40,
+          "tester_addr": 241,
+          "explicit_length": true,
+          "pin": 8
+        }
+      ]
+    }
+  ],
+  "provenance": "Community-defined from public OBD-II and KWP2000 documentation."
+}

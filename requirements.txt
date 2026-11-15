@@ -1,0 +1,13 @@
+# Runtime
+PyQt6>=6.6.0
+pyqtgraph>=0.13.0
+pyserial>=3.5
+python-can>=4.3.0
+
+# Optional (imported only when used):
+#   bleak       - Bluetooth LE OBD adapters (ble://...)
+#   doipclient  - ISO 13400 DoIP vehicles (doip://...)
+# pip install bleak doipclient
+
+# Test / development
+pytest>=7.0.0

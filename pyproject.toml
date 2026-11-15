@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "klinescan"
+dynamic = ["version"]
+description = "Native K-line, CAN, UDS and KWP1281 automotive diagnostic suite"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "PyQt6>=6.6,<7",
+    "pyqtgraph>=0.13,<0.15",
+    "pyserial>=3.5,<4",
+    "python-can>=4.3,<5",
+]
+
+[project.optional-dependencies]
+ble = ["bleak>=0.22"]          # Bluetooth LE OBD adapters (ble://...)
+doip = ["doipclient>=1.1"]     # ISO 13400 DoIP vehicles (doip://...)
+ftdi = ["pyftdi>=0.55"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+klinescan-dat = "klinescan.containers.cli:main"
+
+[project.gui-scripts]
+klinescan = "klinescan.app:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "klinescan.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["klinescan*"]
+
+[tool.setuptools.package-data]
+klinescan = ["data/*.json", "ui/theme/qss/*.qss", "ui/theme/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

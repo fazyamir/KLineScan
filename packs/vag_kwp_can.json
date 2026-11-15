@@ -1,0 +1,130 @@
+{
+  "pack_id": "vag_kwp_can",
+  "name": "Volkswagen / Audi / Skoda / Seat (VAG)",
+  "version": "1.3",
+  "region": "Europe / Worldwide",
+  "vehicles": [
+    {
+      "label": "Volkswagen Golf / Passat / Jetta (K-Line KWP1281 / KWP2000)",
+      "make": "Volkswagen",
+      "model": "Golf IV / Passat B5 / Jetta",
+      "year": "1997-2005",
+      "system_type": "K-Line Pin 7",
+      "targets": [
+        {
+          "name": "01 - Engine Electronics (KWP2000 10400)",
+          "protocol": "ISO 14230 (KWP2000 Fast Init)",
+          "baudrate": 10400,
+          "slow_init_addr": 1,
+          "tester_addr": 241,
+          "ecu_addr": 1,
+          "explicit_length": false,
+          "pin": 7,
+          "actuators": [
+            {
+              "id": "throttle_align",
+              "name": "Throttle Body Alignment (TBA)",
+              "description": "Aligns throttle plate stops and potentiometers (Group 060 / 098).",
+              "payload_start": "300101",
+              "payload_stop": "300100",
+              "duration_seconds": 10,
+              "warning": "Engine must be OFF with ignition ON. Do not touch accelerator pedal."
+            }
+          ],
+          "special_functions": [
+            {
+              "id": "sri_reset",
+              "name": "Service Reminder Interval (SRI) Reset",
+              "description": "Resets the service interval indicator on the instrument cluster.",
+              "steps": [
+                "Ignition ON",
+                "Execute adaptation channel 0x02 to 0",
+                "Cycle ignition"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "03 - ABS Brakes (KWP1281 / KWP2000)",
+          "protocol": "ISO 14230 (KWP2000 Fast Init)",
+          "baudrate": 9600,
+          "slow_init_addr": 3,
+          "tester_addr": 241,
+          "ecu_addr": 3,
+          "explicit_length": true,
+          "pin": 7
+        },
+        {
+          "name": "15 - Airbags",
+          "protocol": "ISO 14230 (KWP2000 Fast Init)",
+          "baudrate": 9600,
+          "slow_init_addr": 21,
+          "tester_addr": 241,
+          "ecu_addr": 21,
+          "explicit_length": true,
+          "pin": 7
+        }
+      ]
+    },
+    {
+      "label": "Audi A4 / A6 / VW Golf VI (UDS CAN 500k)",
+      "make": "Audi / Volkswagen",
+      "model": "A4 / A6 / Golf VI / Tiguan",
+      "year": "2008-2015",
+      "system_type": "UDS over CAN",
+      "targets": [
+        {
+          "name": "01 - Engine Control Module (UDS 0x7E0)",
+          "protocol": "ISO 14229 (UDS over CAN)",
+          "baudrate": 500000,
+          "can_tx_id": 2016,
+          "can_rx_id": 2024,
+          "pin": 6,
+          "actuators": [
+            {
+              "id": "fuel_metering",
+              "name": "Fuel Metering Valve Test",
+              "description": "Activates high pressure fuel rail metering valve.",
+              "payload_start": "2F0203",
+              "payload_stop": "2F0200",
+              "duration_seconds": 5,
+              "warning": "Ensure engine is cold or off."
+            }
+          ],
+          "special_functions": [
+            {
+              "id": "dpf_regen",
+              "name": "Service DPF Regeneration Trigger",
+              "description": "Initiates particulate filter regeneration procedure.",
+              "steps": [
+                "Fuel tank at least 1/4 full",
+                "Coolant temp above 70°C",
+                "Hood closed and transmission in Park / Neutral",
+                "Click Execute"
+              ]
+            },
+            {
+              "id": "epb_service",
+              "name": "Electronic Parking Brake (EPB) Service Mode",
+              "description": "Retracts caliper pistons to allow brake pad replacement.",
+              "steps": [
+                "Vehicle parked on flat surface with wheels chocked",
+                "Release parking brake switch",
+                "Click Execute to open pistons fully"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "03 - Brakes / ESP (UDS 0x7E2)",
+          "protocol": "ISO 14229 (UDS over CAN)",
+          "baudrate": 500000,
+          "can_tx_id": 2018,
+          "can_rx_id": 2026,
+          "pin": 6
+        }
+      ]
+    }
+  ],
+  "provenance": "Community-defined from public KWP1281, KWP2000 and UDS documentation."
+}

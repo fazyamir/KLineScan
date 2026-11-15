@@ -1,0 +1,28 @@
+{
+  "pack_id": "nissan_consult",
+  "name": "Nissan / Infiniti (Consult I, pre-OBD)",
+  "version": "1.0",
+  "region": "Worldwide",
+  "notes": "Consult I protocol per the open-source OpenConsult project (github.com/jonsim/openconsult). Grey 14-pin connector, 1989-2000. Needs a Consult cable on a serial port at 9600 baud. Read-only: clearing codes is not implemented. Not yet validated on a vehicle.",
+  "vehicles": [
+    {
+      "label": "Nissan / Infiniti 1989-2000 (Consult I, 14-pin)",
+      "make": "Nissan",
+      "model": "Consult I engine ECU",
+      "year": "1989-2000",
+      "system_type": "Consult I",
+      "targets": [
+        {
+          "name": "Engine ECU (Consult I)",
+          "protocol": "NISSAN_CONSULT",
+          "baudrate": 9600,
+          "pin": 0,
+          "echo_mode": "off",
+          "confidence": "unverified",
+          "source_ref": "github.com/jonsim/openconsult consult_interface.cpp"
+        }
+      ]
+    }
+  ],
+  "provenance": "Derived from the public OpenConsult project and community notes."
+}

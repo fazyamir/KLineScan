@@ -1,0 +1,87 @@
+{
+  "pack_id": "generic_obd2",
+  "name": "Generic OBD-II / EOBD",
+  "version": "1.0",
+  "region": "Global",
+  "vehicles": [
+    {
+      "label": "Generic OBD-II (ISO 9141-2 Slow Init)",
+      "make": "Generic",
+      "model": "Standard OBD-II",
+      "year": "1996+",
+      "system_type": "Gasoline / Diesel",
+      "targets": [
+        {
+          "name": "Engine (CARB 0x33)",
+          "protocol": "ISO 9141-2 (5-Baud Slow Init)",
+          "baudrate": 10400,
+          "slow_init_addr": 51,
+          "tester_addr": 241,
+          "ecu_addr": 18,
+          "use_obd_header": true,
+          "pin": 7,
+          "actuators": [
+            {
+              "id": "evap_purge",
+              "name": "EVAP Canister Purge Valve",
+              "description": "Toggles EVAP vacuum purge valve for 5 seconds.",
+              "payload_start": "300101",
+              "payload_stop": "300100",
+              "duration_seconds": 5,
+              "warning": "Ensure engine is idling and fuel tank cap is tightened."
+            }
+          ],
+          "special_functions": [
+            {
+              "id": "oil_reset",
+              "name": "Maintenance Service Reminder Reset",
+              "description": "Resets the oil service counter and dash reminder.",
+              "steps": [
+                "Turn ignition ON, engine OFF",
+                "Click Execute",
+                "Cycle ignition OFF for 10s"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Generic CAN Vehicle (ISO 15765-4 500kbps)",
+      "make": "Generic",
+      "model": "High-Speed CAN OBD-II",
+      "year": "2008+",
+      "system_type": "CAN 11-Bit 500k",
+      "targets": [
+        {
+          "name": "Engine / OBD Broadcast (0x7DF)",
+          "protocol": "ISO 15765-4 (CAN OBD-II)",
+          "baudrate": 500000,
+          "can_tx_id": 2015,
+          "can_rx_id": 2024,
+          "pin": 6,
+          "actuators": [
+            {
+              "id": "cooling_fan",
+              "name": "Radiator Cooling Fan (High Speed)",
+              "description": "Commands high-speed radiator cooling fan relay test.",
+              "payload_start": "2F0103",
+              "payload_stop": "2F0100",
+              "duration_seconds": 8,
+              "warning": "Keep hands and tools clear of the radiator fan blades."
+            }
+          ]
+        },
+        {
+          "name": "Engine Physical (0x7E0)",
+          "protocol": "ISO 15765-4 (CAN OBD-II)",
+          "baudrate": 500000,
+          "can_tx_id": 2016,
+          "can_rx_id": 2024,
+          "pin": 6
+        }
+      ]
+    }
+  ],
+  "provenance": "Derived from public OBD-II documentation (SAE J1979, ISO 15765-4, ISO 9141-2)."
+}

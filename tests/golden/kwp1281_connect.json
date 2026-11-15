@@ -1,0 +1,26 @@
+{
+  "id": "kwp1281_connect",
+  "description": "KWP1281 5-baud connect, keybyte ACK, identification block and block counter handshake.",
+  "provenance": "Synthetic conformance fixture derived from the KWP1281 byte-handshake rules and the project's KWP1281 notes. Not a vehicle capture.",
+  "protocol": "kwp1281",
+  "target": {
+    "name": "VAG KWP1281 ECU",
+    "protocol": "KWP1281",
+    "baudrate": 10400,
+    "slow_init_addr": "0x01"
+  },
+  "simulator": {
+    "slow_init": "55 01 8A",
+    "initial_blocks": [
+      {
+        "title": "F6",
+        "data_ascii": "1J0035180B"
+      }
+    ],
+    "responses": {}
+  },
+  "operation": {
+    "name": "connect",
+    "expect": true
+  }
+}

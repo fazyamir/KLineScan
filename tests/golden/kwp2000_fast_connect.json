@@ -1,0 +1,23 @@
+{
+  "id": "kwp2000_fast_connect",
+  "description": "KWP2000 fast-init StartCommunication on a K-line ECU.",
+  "provenance": "Synthetic conformance fixture derived from the KWP2000 framing and checksum rules. Not a vehicle capture.",
+  "protocol": "kwp2000",
+  "target": {
+    "name": "KWP2000 ECU",
+    "protocol": "KWP2000_FAST",
+    "baudrate": 10400,
+    "ecu_addr": "0x11",
+    "tester_addr": "0xF1"
+  },
+  "exchanges": [
+    {
+      "tx": "81 11 F1 81 04",
+      "rx": ["83 F1 11 C1 8A 00 D0"]
+    }
+  ],
+  "operation": {
+    "name": "connect",
+    "expect": true
+  }
+}

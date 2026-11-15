@@ -1,0 +1,60 @@
+{
+  "id": "obd2_can_live_pids",
+  "description": "CAN OBD-II supported-PID discovery (01 00) then live decode of every supported PID: load, coolant, RPM, speed, intake air, throttle.",
+  "provenance": "Synthetic conformance fixture derived from J1979 Mode 01 scaling rules. Not a vehicle capture.",
+  "protocol": "obd2",
+  "target": {
+    "name": "CAN OBD-II",
+    "protocol": "CAN_OBD",
+    "baudrate": 500000,
+    "can_tx_id": "0x7DF",
+    "can_rx_id": "0x7E8"
+  },
+  "exchanges": [
+    {
+      "tx": "02 01 00 00 00 00 00 00",
+      "rx": [
+        "06 41 00 18 1A 80 00 00"
+      ]
+    },
+    {
+      "tx": "02 01 04 00 00 00 00 00",
+      "rx": [
+        "03 41 04 80 00 00 00 00"
+      ]
+    },
+    {
+      "tx": "02 01 05 00 00 00 00 00",
+      "rx": [
+        "03 41 05 5A 00 00 00 00"
+      ]
+    },
+    {
+      "tx": "02 01 0C 00 00 00 00 00",
+      "rx": [
+        "04 41 0C 1A F8 00 00 00"
+      ]
+    },
+    {
+      "tx": "02 01 0D 00 00 00 00 00",
+      "rx": [
+        "03 41 0D 32 00 00 00 00"
+      ]
+    },
+    {
+      "tx": "02 01 0F 00 00 00 00 00",
+      "rx": [
+        "03 41 0F 3C 00 00 00 00"
+      ]
+    },
+    {
+      "tx": "02 01 11 00 00 00 00 00",
+      "rx": [
+        "03 41 11 40 00 00 00 00"
+      ]
+    }
+  ],
+  "operation": {
+    "name": "read_live_pids"
+  }
+}

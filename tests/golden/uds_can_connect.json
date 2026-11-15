@@ -1,0 +1,23 @@
+{
+  "id": "uds_can_connect",
+  "description": "UDS over ISO-TP connect using DiagnosticSessionControl extended session.",
+  "provenance": "Synthetic conformance fixture derived from ISO 14229 service 0x10 framing. Not a vehicle capture.",
+  "protocol": "uds",
+  "target": {
+    "name": "UDS ECU",
+    "protocol": "CAN_OBD",
+    "baudrate": 500000,
+    "can_tx_id": "0x7E0",
+    "can_rx_id": "0x7E8"
+  },
+  "exchanges": [
+    {
+      "tx": "02 10 03 00 00 00 00 00",
+      "rx": ["06 50 03 00 32 01 F4 00"]
+    }
+  ],
+  "operation": {
+    "name": "connect",
+    "expect": true
+  }
+}

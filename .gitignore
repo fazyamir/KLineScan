@@ -1,0 +1,42 @@
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Runtime output
+logs/
+*.log
+*.rec
+*.rec.gz
+/screenshots/
+
+# Local editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Packaging/build output
+build/
+dist/
+*.egg-info/
+*.sqlite3
+*.zip
+
+# Reverse-engineering scratch data (never committed)
+.rom-work/
+dump*
+# Diagnostic container files (any case)
+*.[Dd][Aa][Tt]
+*.his.[Dd][Aa][Tt]

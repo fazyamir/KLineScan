@@ -1,0 +1,32 @@
+{
+  "id": "kwp1281_faults",
+  "description": "KWP1281 ReadFaults returns one VAG fault record and completes the ACK handshake.",
+  "provenance": "Synthetic conformance fixture derived from the KWP1281 fault block layout. Not a vehicle capture.",
+  "protocol": "kwp1281",
+  "target": {
+    "name": "VAG KWP1281 ECU",
+    "protocol": "KWP1281",
+    "baudrate": 10400,
+    "slow_init_addr": "0x01"
+  },
+  "simulator": {
+    "slow_init": "55 01 8A",
+    "initial_blocks": [
+      {
+        "title": "F6",
+        "data_ascii": "1J0035180B"
+      }
+    ],
+    "responses": {
+      "07": [
+        {
+          "title": "FC",
+          "data_hex": "01 15 20"
+        }
+      ]
+    }
+  },
+  "operation": {
+    "name": "read_dtcs"
+  }
+}
